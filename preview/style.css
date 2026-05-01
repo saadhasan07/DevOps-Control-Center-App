@@ -254,6 +254,61 @@ select {
   margin: 18px 0;
 }
 
+.command-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.command-card {
+  padding: 18px;
+  border-radius: 22px;
+  border: 1px solid rgba(145, 168, 205, 0.12);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02)),
+    radial-gradient(circle at top right, rgba(58, 184, 255, 0.14), transparent 32%);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.18);
+}
+
+.command-label {
+  margin: 0 0 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.72rem;
+  color: var(--blue);
+}
+
+.command-card strong {
+  display: block;
+  font-size: 1.05rem;
+  line-height: 1.35;
+  margin-bottom: 8px;
+}
+
+.command-meta {
+  margin: 0 0 14px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.command-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.status-chip {
+  padding: 7px 11px;
+  border-radius: 999px;
+  border: 1px solid rgba(27, 226, 142, 0.18);
+  background: rgba(27, 226, 142, 0.08);
+  color: #9ff0c9;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
 .metric-card {
   border-radius: 22px;
   padding: 16px;
@@ -675,6 +730,7 @@ select {
 
 @media (max-width: 1120px) {
   .metrics-grid,
+  .command-strip,
   .view-grid.active {
     grid-template-columns: 1fr;
   }
