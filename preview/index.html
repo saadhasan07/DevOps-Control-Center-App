@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DevOps Control Center Preview</title>
+    <meta
+      name="description"
+      content="Interactive DevOps Control Center preview for CI/CD visibility, operational health, and deployment awareness."
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="scanlines"></div>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand-lockup">
+          <div class="brand-mark">DC</div>
+          <div>
+            <p class="eyebrow">DevOps Product</p>
+            <h1>Control Center</h1>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav">
+          <button class="nav-link active" data-view="overview">Overview</button>
+          <button class="nav-link" data-view="pipelines">Pipelines</button>
+          <button class="nav-link" data-view="nodes">Nodes</button>
+        </nav>
+
+        <section class="sidebar-panel">
+          <p class="eyebrow">Live Signal</p>
+          <div class="sidebar-stats">
+            <span><strong>4</strong> healthy services</span>
+            <span><strong>1</strong> degraded service</span>
+            <span><strong>1</strong> critical outage</span>
+          </div>
+        </section>
+      </aside>
+
+      <main class="main-panel">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Operations Console</p>
+            <h2>Live operational visibility across services, pipelines, and nodes.</h2>
+          </div>
+
+          <div class="topbar-actions">
+            <input class="search-input" id="service-search" placeholder="Search services or regions" />
+            <div class="signal-pill danger"><span id="alert-count">3</span> alerts</div>
+            <button class="primary-button" id="open-deploy">Deploy</button>
+            <span class="clock" id="clock">--:--:-- UTC</span>
+          </div>
+        </header>
+
+        <section class="metrics-grid">
+          <article class="metric-card tone-blue">
+            <div class="metric-head">
+              <span>Cluster CPU</span>
+              <strong><span data-counter="58.4">0</span><small>%</small></strong>
+            </div>
+            <div class="sparkline" data-series="58,62,55,69,61,66,54,58,70,64,59,62,68,57,66,60,73,58"></div>
+          </article>
+          <article class="metric-card tone-purple">
+            <div class="metric-head">
+              <span>Memory</span>
+              <strong><span data-counter="71.1">0</span><small>%</small></strong>
+            </div>
+            <div class="sparkline" data-series="66,67,68,72,74,69,70,75,73,77,71,70,74,72,76,71,73,71"></div>
+          </article>
+          <article class="metric-card tone-green">
+            <div class="metric-head">
+              <span>Req / sec</span>
+              <strong><span data-counter="847">0</span><small>rps</small></strong>
+            </div>
+            <div class="sparkline" data-series="42,48,44,53,57,49,62,58,61,68,59,63,70,66,72,69,75,71"></div>
+          </article>
+          <article class="metric-card tone-red">
+            <div class="metric-head">
+              <span>Error Rate</span>
+              <strong><span data-counter="1.9">0</span><small>%</small></strong>
+            </div>
+            <div class="sparkline" data-series="8,11,10,14,9,13,16,12,18,15,11,10,13,17,12,14,18,16"></div>
+          </article>
+        </section>
+
+        <section class="view-grid active" data-panel="overview">
+          <article class="panel panel-large">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Service Health</p>
+                <h3>6 tracked services</h3>
+              </div>
+              <span class="panel-note">Interactive demo</span>
+            </div>
+
+            <div class="service-list" id="service-list">
+              <div class="service-row" data-service="api gateway us-east-1">
+                <div class="service-main">
+                  <span class="status-dot healthy"></span>
+                  <div>
+                    <strong>API Gateway</strong>
+                    <p>us-east-1 · v3.2.1</p>
+                  </div>
+                </div>
+                <div class="service-metrics">
+                  <span>41ms</span>
+                  <span>4× replicas</span>
+                </div>
+                <div class="service-actions">
+                  <button class="ghost-button open-logs" data-target="API Gateway">Logs</button>
+                  <button class="ghost-button service-scale" data-service-name="API Gateway">Scale</button>
+                  <button class="primary-button subtle service-restart">Restart</button>
+                </div>
+              </div>
+
+              <div class="service-row" data-service="auth service us-east-1">
+                <div class="service-main">
+                  <span class="status-dot healthy"></span>
+                  <div>
+                    <strong>Auth Service</strong>
+                    <p>us-east-1 · v2.0.5</p>
+                  </div>
+                </div>
+                <div class="service-metrics">
+                  <span>19ms</span>
+                  <span>3× replicas</span>
+                </div>
+                <div class="service-actions">
+                  <button class="ghost-button open-logs" data-target="Auth Service">Logs</button>
+                  <button class="ghost-button service-scale" data-service-name="Auth Service">Scale</button>
+                  <button class="primary-button subtle service-restart">Restart</button>
+                </div>
+              </div>
+
+              <div class="service-row" data-service="payment service eu-west-1">
+                <div class="service-main">
+                  <span class="status-dot degraded"></span>
+                  <div>
+                    <strong>Payment Service</strong>
+                    <p>eu-west-1 · v1.9.3</p>
+                  </div>
+                </div>
+                <div class="service-metrics">
+                  <span>318ms</span>
+                  <span>2× replicas</span>
+                </div>
+                <div class="service-actions">
+                  <button class="ghost-button open-logs" data-target="Payment Service">Logs</button>
+                  <button class="ghost-button service-scale" data-service-name="Payment Service">Scale</button>
+                  <button class="primary-button subtle service-restart">Restart</button>
+                  <button class="danger-button service-rollback">Rollback</button>
+                </div>
+              </div>
+
+              <div class="service-row" data-service="notifications us-west-2">
+                <div class="service-main">
+                  <span class="status-dot healthy"></span>
+                  <div>
+                    <strong>Notifications</strong>
+                    <p>us-west-2 · v4.1.0</p>
+                  </div>
+                </div>
+                <div class="service-metrics">
+                  <span>63ms</span>
+                  <span>2× replicas</span>
+                </div>
+                <div class="service-actions">
+                  <button class="ghost-button open-logs" data-target="Notifications">Logs</button>
+                  <button class="ghost-button service-scale" data-service-name="Notifications">Scale</button>
+                  <button class="primary-button subtle service-restart">Restart</button>
+                </div>
+              </div>
+
+              <div class="service-row" data-service="data pipeline ap-south-1">
+                <div class="service-main">
+                  <span class="status-dot healthy"></span>
+                  <div>
+                    <strong>Data Pipeline</strong>
+                    <p>ap-south-1 · v2.3.7</p>
+                  </div>
+                </div>
+                <div class="service-metrics">
+                  <span>208ms</span>
+                  <span>5× replicas</span>
+                </div>
+                <div class="service-actions">
+                  <button class="ghost-button open-logs" data-target="Data Pipeline">Logs</button>
+                  <button class="ghost-button service-scale" data-service-name="Data Pipeline">Scale</button>
+                  <button class="primary-button subtle service-restart">Restart</button>
+                </div>
+              </div>
+
+              <div class="service-row" data-service="ml inference us-east-1">
+                <div class="service-main">
+                  <span class="status-dot down"></span>
+                  <div>
+                    <strong>ML Inference</strong>
+                    <p>us-east-1 · v1.2.0</p>
+                  </div>
+                </div>
+                <div class="service-metrics">
+                  <span>N/A</span>
+                  <span>0× replicas</span>
+                </div>
+                <div class="service-actions">
+                  <button class="ghost-button open-logs" data-target="ML Inference">Logs</button>
+                  <button class="ghost-button service-scale" data-service-name="ML Inference">Scale</button>
+                  <button class="primary-button subtle service-restart">Start</button>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Alert Feed</p>
+                <h3>Prioritized incidents</h3>
+              </div>
+              <span class="panel-note">3 open</span>
+            </div>
+
+            <div class="alert-list" id="alert-list">
+              <div class="alert-card critical" data-alert-open="true">
+                <div class="alert-top">
+                  <span class="severity-badge critical">critical</span>
+                  <time>0m ago</time>
+                </div>
+                <p>ml-inference: pod CrashLoopBackOff on worker-07</p>
+                <div class="alert-actions">
+                  <button class="ghost-button acknowledge-alert">Acknowledge</button>
+                  <button class="danger-button ghost dismiss-alert">Dismiss</button>
+                </div>
+              </div>
+
+              <div class="alert-card warning" data-alert-open="true">
+                <div class="alert-top">
+                  <span class="severity-badge warning">warning</span>
+                  <time>4m ago</time>
+                </div>
+                <p>payment-service: p99 latency above 300ms for 5 minutes</p>
+                <div class="alert-actions">
+                  <button class="ghost-button acknowledge-alert">Acknowledge</button>
+                  <button class="danger-button ghost dismiss-alert">Dismiss</button>
+                </div>
+              </div>
+
+              <div class="alert-card warning" data-alert-open="true">
+                <div class="alert-top">
+                  <span class="severity-badge warning">warning</span>
+                  <time>12m ago</time>
+                </div>
+                <p>data-pipeline: Kafka consumer lag spike on topic events.raw</p>
+                <div class="alert-actions">
+                  <button class="ghost-button acknowledge-alert">Acknowledge</button>
+                  <button class="danger-button ghost dismiss-alert">Dismiss</button>
+                </div>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section class="panel" data-panel="pipelines">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">CI / CD Pipelines</p>
+              <h3>Build, test, security, deploy</h3>
+            </div>
+            <button class="primary-button subtle" id="open-pipeline-deploy">New pipeline</button>
+          </div>
+
+          <div class="pipeline-list">
+            <div class="pipeline-row">
+              <div class="pipeline-summary">
+                <strong>main → production</strong>
+                <p>core-api · main · a3f9c12 · 3m 42s</p>
+              </div>
+              <div class="pipeline-stages">
+                <span class="stage-pill done">build</span>
+                <span class="stage-pill done">test</span>
+                <span class="stage-pill done">security</span>
+                <span class="stage-pill running">deploy</span>
+              </div>
+              <div class="pipeline-actions">
+                <button class="ghost-button open-logs" data-target="core-api">Logs</button>
+                <button class="primary-button subtle rerun-pipeline">Re-run</button>
+              </div>
+            </div>
+
+            <div class="pipeline-row">
+              <div class="pipeline-summary">
+                <strong>feature/auth-v2</strong>
+                <p>auth-service · feature/auth-v2 · b7e204f · 1m 18s</p>
+              </div>
+              <div class="pipeline-stages">
+                <span class="stage-pill done">build</span>
+                <span class="stage-pill done">test</span>
+                <span class="stage-pill failed">security</span>
+                <span class="stage-pill idle">deploy</span>
+              </div>
+              <div class="pipeline-actions">
+                <button class="ghost-button open-logs" data-target="auth-service">Logs</button>
+                <button class="primary-button subtle rerun-pipeline">Re-run</button>
+              </div>
+            </div>
+
+            <div class="pipeline-row">
+              <div class="pipeline-summary">
+                <strong>release/2.4.1</strong>
+                <p>payment-service · release/2.4.1 · c91a3d7 · 6m 02s</p>
+              </div>
+              <div class="pipeline-stages">
+                <span class="stage-pill done">build</span>
+                <span class="stage-pill done">test</span>
+                <span class="stage-pill done">security</span>
+                <span class="stage-pill done">deploy</span>
+              </div>
+              <div class="pipeline-actions">
+                <button class="ghost-button open-logs" data-target="payment-service">Logs</button>
+                <button class="primary-button subtle rerun-pipeline">Re-run</button>
+              </div>
+            </div>
+
+            <div class="pipeline-row">
+              <div class="pipeline-summary">
+                <strong>hotfix/cache</strong>
+                <p>cdn-edge · hotfix/cache · d45b8e1 · 0m 21s</p>
+              </div>
+              <div class="pipeline-stages">
+                <span class="stage-pill running">build</span>
+                <span class="stage-pill idle">test</span>
+                <span class="stage-pill idle">security</span>
+                <span class="stage-pill idle">deploy</span>
+              </div>
+              <div class="pipeline-actions">
+                <button class="ghost-button open-logs" data-target="cdn-edge">Logs</button>
+                <button class="primary-button subtle rerun-pipeline">Re-run</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel" data-panel="nodes">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Kubernetes Nodes</p>
+              <h3>Fleet status and scheduling controls</h3>
+            </div>
+            <button class="ghost-button" id="refresh-nodes">Refresh</button>
+          </div>
+
+          <div class="node-list">
+            <div class="node-row">
+              <div class="node-main">
+                <span class="status-dot healthy"></span>
+                <div>
+                  <strong>k8s-master-01</strong>
+                  <p>ready</p>
+                </div>
+              </div>
+              <div class="node-bars">
+                <div>
+                  <label>CPU</label>
+                  <div class="usage-bar"><span class="healthy-fill" style="width: 34%"></span></div>
+                </div>
+                <div>
+                  <label>Memory</label>
+                  <div class="usage-bar"><span class="purple-fill" style="width: 61%"></span></div>
+                </div>
+              </div>
+              <div class="node-meta">
+                <span>12 pods</span>
+                <span>34% cpu</span>
+              </div>
+              <div class="node-actions">
+                <button class="ghost-button cordon-node">Cordon</button>
+                <button class="ghost-button describe-node">Describe</button>
+              </div>
+            </div>
+
+            <div class="node-row">
+              <div class="node-main">
+                <span class="status-dot down"></span>
+                <div>
+                  <strong>k8s-worker-07</strong>
+                  <p>not-ready</p>
+                </div>
+              </div>
+              <div class="node-bars">
+                <div>
+                  <label>CPU</label>
+                  <div class="usage-bar"><span class="danger-fill" style="width: 91%"></span></div>
+                </div>
+                <div>
+                  <label>Memory</label>
+                  <div class="usage-bar"><span class="danger-fill" style="width: 94%"></span></div>
+                </div>
+              </div>
+              <div class="node-meta">
+                <span>28 pods</span>
+                <span>91% cpu</span>
+              </div>
+              <div class="node-actions">
+                <button class="ghost-button cordon-node">Cordon</button>
+                <button class="ghost-button describe-node">Describe</button>
+              </div>
+            </div>
+
+            <div class="node-row">
+              <div class="node-main">
+                <span class="status-dot healthy"></span>
+                <div>
+                  <strong>k8s-worker-03</strong>
+                  <p>ready</p>
+                </div>
+              </div>
+              <div class="node-bars">
+                <div>
+                  <label>CPU</label>
+                  <div class="usage-bar"><span class="warning-fill" style="width: 78%"></span></div>
+                </div>
+                <div>
+                  <label>Memory</label>
+                  <div class="usage-bar"><span class="warning-fill" style="width: 82%"></span></div>
+                </div>
+              </div>
+              <div class="node-meta">
+                <span>31 pods</span>
+                <span>78% cpu</span>
+              </div>
+              <div class="node-actions">
+                <button class="ghost-button cordon-node">Cordon</button>
+                <button class="ghost-button describe-node">Describe</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="toast-stack" id="toast-stack"></div>
+
+    <div class="modal-backdrop hidden" id="log-modal">
+      <div class="modal shell-modal">
+        <div class="modal-head">
+          <div>
+            <p class="eyebrow">Live Logs</p>
+            <h3 id="log-title">Service Logs</h3>
+          </div>
+          <button class="icon-button close-modal" data-close="log-modal">×</button>
+        </div>
+        <div class="terminal-log" id="terminal-log"></div>
+      </div>
+    </div>
+
+    <div class="modal-backdrop hidden" id="deploy-modal">
+      <div class="modal">
+        <div class="modal-head">
+          <div>
+            <p class="eyebrow">Manual Deployment</p>
+            <h3>Trigger a new deployment</h3>
+          </div>
+          <button class="icon-button close-modal" data-close="deploy-modal">×</button>
+        </div>
+        <div class="modal-body">
+          <label>
+            Repository
+            <input id="deploy-repo" value="core-api" />
+          </label>
+          <label>
+            Branch or tag
+            <input id="deploy-branch" value="main" />
+          </label>
+          <label>
+            Environment
+            <select id="deploy-environment">
+              <option value="staging">staging</option>
+              <option value="production">production</option>
+            </select>
+          </label>
+          <div class="modal-actions">
+            <button class="ghost-button close-modal" data-close="deploy-modal">Cancel</button>
+            <button class="primary-button" id="confirm-deploy">Deploy now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+  </html>
