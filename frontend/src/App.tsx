@@ -98,6 +98,27 @@ const logPool = [
   "[WARN] Slow query detected (1230ms): SELECT * FROM events WHERE ...",
 ];
 
+const overviewHighlights = [
+  {
+    label: "Release lane",
+    title: "Prod window open for core-api",
+    meta: "2 services staged · 1 deployment running",
+    chips: ["deploying", "prod", "3m 42s"],
+  },
+  {
+    label: "Incident focus",
+    title: "ML inference recovery playbook active",
+    meta: "CrashLoopBackOff isolated to worker-07",
+    chips: ["critical", "on-call", "rollback ready"],
+  },
+  {
+    label: "Runner fleet",
+    title: "7 of 9 runners available",
+    meta: "Queue time stable at 14s average",
+    chips: ["healthy", "autoscale", "eu + us"],
+  },
+];
+
 function useNow() {
   const [now, setNow] = useState(new Date());
 
@@ -467,6 +488,23 @@ function App() {
             <MetricCard label="Memory" value={memorySeries[memorySeries.length - 1].value.toFixed(1)} unit="%" tone="purple" series={memorySeries} />
             <MetricCard label="Req / sec" value={(rpsSeries[rpsSeries.length - 1].value * 122).toFixed(0)} unit="rps" tone="green" series={rpsSeries} />
             <MetricCard label="Error rate" value={(errorSeries[errorSeries.length - 1].value / 10).toFixed(2)} unit="%" tone="red" series={errorSeries} />
+          </section>
+
+          <section className="command-strip">
+            {overviewHighlights.map((item) => (
+              <article key={item.label} className="command-card">
+                <p className="command-label">{item.label}</p>
+                <strong>{item.title}</strong>
+                <p className="command-meta">{item.meta}</p>
+                <div className="command-chips">
+                  {item.chips.map((chip) => (
+                    <span key={chip} className="status-chip">
+                      {chip}
+                    </span>
+                  ))}
+                </div>
+              </article>
+            ))}
           </section>
 
           {activeView === "overview" && (
