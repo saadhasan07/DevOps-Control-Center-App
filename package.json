@@ -1,0 +1,15 @@
+{
+  "name": "devops-control-center",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "npm --workspace frontend run dev",
+    "build": "npm --workspace frontend run build",
+    "preview": "npm --workspace frontend run preview",
+    "dev:backend": "npm --workspace backend run dev"
+  }
+}
